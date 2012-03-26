@@ -11,9 +11,6 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;;    slime-fuzzy
-;;    anything-el-swank-fuzzy
-;;     slime-ritz
 
 (defvar my-packages
   '(starter-kit
@@ -106,7 +103,6 @@
 
 (require 'undo-tree)
 (global-undo-tree-mode)
-;; (add-hook 'clojure-mode-hook 'undo-tree)
 
 ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 
@@ -143,7 +139,6 @@
  '(blink-cursor-mode nil)
  '(c-basic-offset 2)
  '(display-time-mode t)
- '(jira-url "http://jiraprod.sea.corp.int.untd.com/jira/rpc/xmlrpc")
  '(js2-auto-indent-p t)
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
