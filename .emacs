@@ -1,12 +1,17 @@
+;; Not recommended but I find it useful for exploration
+(menu-bar-mode  t)
+
 ;; http://www.emacswiki.org/emacs/GoodFonts
 (set-face-attribute 'default nil :family "Inconsolata" :height 95)
 
-;; http://technomancy.us/153
+;; ;; http://tromey.com/elpa/install.html
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-
 (package-initialize)
+
+
+;; ;; http://technomancy.us/153
+(add-to-list 'package-archives
+            '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -57,7 +62,6 @@
 
 
 ;; Display
-
 (require 'zenburn-theme)
 
 ;; Clojure
@@ -67,7 +71,6 @@
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
 ;; Utilities 
-
 (defun jw/beginning-of-buffer ()
   "Move to the beginning of the buffer."
   (interactive)
@@ -81,43 +84,24 @@
   (indent-region (point-min) (point-max))
   (whitespace-cleanup))
 
-;; Custom installations
-
-;; http://cx4a.org/software/auto-complete/manual.html#Installation
-;; git clone https://github.com/m2ym/auto-complete.git
-;; %  make install DIR=$HOME/.emacs.d/
-(add-to-list 'load-path "~/sandbox/auto-complete")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-
-;; https://github.com/purcell/ac-slime
-(add-to-list 'load-path "~/sandbox/ac-slime")
-(require 'ac-slime)
-
-;; Not recommended but I find it useful for exploration
-(menu-bar-mode  t)
-
-;; $ lein plugin install swank-clojure 1.3.1
-;; (add-hook 'clojure-mode-hook 'turn-on-paredit)
 
 (require 'undo-tree)
 (global-undo-tree-mode)
 
-;; https://github.com/briancarper/dotfiles/blob/master/.emacs
+;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 
-;; org-mode
+;; ;; org-mode
 (require 'org-install)
 
 (org-remember-insinuate)
 (global-set-key (kbd "C-c m") 'org-remember)
 
-(setq org-directory "~/Dropbox/Org/")
-(setq org-mobile-directory "~/Dropbox/Org/Mobile/")
-(setq org-agenda-files '("~/Dropbox/Org/my.org"))
-(setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
+;; (setq org-directory "~/Dropbox/Org/")
+;; (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
+;; (setq org-agenda-files '("~/Dropbox/Org/my.org"))
+;; (setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
 
-;; Better support for undo
+;; ;; Better support for undo
 (global-set-key "\C-R" 'undo-tree-undo)
 
 
@@ -130,6 +114,25 @@
          (add-hook 'before-save-hook
                    (lambda ()
                      (jw/write-file-cleanup-hook)))))
+
+
+;; ;; $ lein plugin install swank-clojure 1.3.1
+(add-hook 'clojure-mode-hook 'turn-on-paredit)
+
+;; ;; Custom installations
+
+;; ;; http://cx4a.org/software/auto-complete/manual.html#Installation
+;; ;; git clone https://github.com/m2ym/auto-complete.git
+;; ;; %  make install DIR=$HOME/.emacs.d/
+;; (add-to-list 'load-path "~/sandbox/auto-complete")
+;; (require 'auto-complete-config)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+;; (ac-config-default)
+
+;; ;; https://github.com/purcell/ac-slime
+;; (add-to-list 'load-path "~/sandbox/ac-slime")
+;; (require 'ac-slime)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -154,3 +157,5 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'ido-exit-minibuffer 'disabled nil)
+
+
