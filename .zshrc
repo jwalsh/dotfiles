@@ -49,19 +49,19 @@ PATH=$JAVA_HOME/bin:$PATH
 
 # export JAVA_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 
-export CATALINA_HOME=~/opt/tomcat
-PATH=$CATALINA_HOME/bin:$PATH
+# export CATALINA_HOME=~/opt/tomcat
+# PATH=$CATALINA_HOME/bin:$PATH
 
-CATALINA_OPTS="-Xms2048m -Xmx2048m -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled -Dcom.sun.management.jmxremote"
-export CATALINA_OPTS
+# CATALINA_OPTS="-Xms2048m -Xmx2048m -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled -Dcom.sun.management.jmxremote"
+# export CATALINA_OPTS
 
-PATH=~/sandbox/git-achievements:$PATH
-export PATH=$PATH
-alias git="git-achievements"
+# PATH=~/sandbox/git-achievements:$PATH
+# export PATH=$PATH
+# alias git="git-achievements"
 
-alias mi="mvn -Dmaven.test.skip=true clean install"
-alias mid="mvn -Dmaven.test.skip=true -Plocal_deploy clean install"
-alias mr="mvn clean install -Pembeded tomcat:run-war -Dmaven.tomcat.port=8081 -Ddeploy.env=localhost; open http://localhost"
+# alias mi="mvn -Dmaven.test.skip=true clean install"
+# alias mid="mvn -Dmaven.test.skip=true -Plocal_deploy clean install"
+# alias mr="mvn clean install -Pembeded tomcat:run-war -Dmaven.tomcat.port=8081 -Ddeploy.env=localhost; open http://localhost"
 
 
 alias cd-c='pwd | pbcopy'
