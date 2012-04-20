@@ -1,13 +1,15 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="jwalsh"
+ZSH_THEME="clean"
 
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=/Users/jwalsh/sandbox/git-achievements:/Users/jwalsh/opt/tomcat/bin:/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home/bin:/Users/jwalsh/opt/android-sdk/tools:/Users/jwalsh/sandbox/emacs.bzr/src:/Users/jwalsh/bin:/Users/jwalsh/sandbox/phantomjs/bin/phantomjs.app/Contents/MacOS:/Users/jwalsh/.gem/ruby/1.8/bin:/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:~/sandbox/clojurescript/bin
+export PATH=/Users/jwalsh/sandbox/emacs/src:/Users/jwalsh/sandbox/nodelint.js:/Users/jwalsh/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin:/Users/jwalsh/opt/gsutil
+
+# export PATH=/Users/jwalsh/sandbox/git-achievements:/Users/jwalsh/opt/tomcat/bin:/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home/bin:/Users/jwalsh/opt/android-sdk/tools:/Users/jwalsh/sandbox/emacs.bzr/src:/Users/jwalsh/bin:/Users/jwalsh/sandbox/phantomjs/bin/phantomjs.app/Contents/MacOS:/Users/jwalsh/.gem/ruby/1.8/bin:/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:~/sandbox/clojurescript/bin
 
 
 export JAVA_OPTS="-Xmx1024m -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled"
