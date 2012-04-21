@@ -1,6 +1,3 @@
-;; Not recommended but I find it useful for exploration
-(menu-bar-mode  t)
-
 ;; http://www.emacswiki.org/emacs/GoodFonts
 (set-face-attribute 'default nil :family "Inconsolata" :height 95)
 
@@ -26,32 +23,36 @@
     slime
     ac-slime
     clojure-mode
-    durendal
     hippie-expand-slime
     clojurescript-mode
-    screen-lines
     org
-    jira
+    org-email
+    org-magit
+    jabber
     json
+    python
     paredit
-    yasnippet
     flymake
     anything-complete
     undo-tree
     magit
     magithub
+    magit-gh-pulls
     coffee-mode
     flymake-coffee
     js2-mode
+    jsshell-bundle
+    phantomjs
     flymake-jshint
     closure-lint-mode
     bookmark+
     anything
-    alpha
     gist
     popup
     erc-nick-notify
     htmlize
+    sass-mode
+    less-css-mode
     markdown-mode
     marmalade
     scpaste))
@@ -96,10 +97,10 @@
 (org-remember-insinuate)
 (global-set-key (kbd "C-c m") 'org-remember)
 
-;; (setq org-directory "~/Dropbox/Org/")
-;; (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
-;; (setq org-agenda-files '("~/Dropbox/Org/my.org"))
-;; (setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
+(setq org-directory "~/Dropbox/Org/")
+(setq org-mobile-directory "~/Dropbox/Org/Mobile/")
+(setq org-agenda-files '("~/Dropbox/Org/my.org"))
+(setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
 
 ;; ;; Better support for undo
 (global-set-key "\C-R" 'undo-tree-undo)
@@ -133,6 +134,7 @@
 ;; (add-to-list 'load-path "~/sandbox/ac-slime")
 ;; (require 'ac-slime)
 
+(menu-bar-mode  t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -157,5 +159,9 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'ido-exit-minibuffer 'disabled nil)
+
+;; Not recommended but I find it useful for exploration
+
+
 
 
