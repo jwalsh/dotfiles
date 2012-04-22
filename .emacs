@@ -1,6 +1,3 @@
-;; http://www.emacswiki.org/emacs/GoodFonts
-(set-face-attribute 'default nil :family "Inconsolata" :height 95)
-
 ;; ;; http://tromey.com/elpa/install.html
 (require 'package)
 (package-initialize)
@@ -30,7 +27,6 @@
     org-magit
     jabber
     json
-    python
     paredit
     flymake
     anything-complete
@@ -65,11 +61,18 @@
 ;; Display
 (require 'zenburn-theme)
 
+;; http://www.emacswiki.org/emacs/GoodFonts
+(set-face-attribute 'default nil :family "Inconsolata" :height 95)
+
+
 ;; Clojure
 (require 'ac-slime)
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-mode-hook 'paredit-mode)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+
+;; (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Utilities 
 (defun jw/beginning-of-buffer ()
@@ -125,10 +128,10 @@
 ;; ;; http://cx4a.org/software/auto-complete/manual.html#Installation
 ;; ;; git clone https://github.com/m2ym/auto-complete.git
 ;; ;; %  make install DIR=$HOME/.emacs.d/
-;; (add-to-list 'load-path "~/sandbox/auto-complete")
-;; (require 'auto-complete-config)
-;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-;; (ac-config-default)
+(add-to-list 'load-path "~/sandbox/auto-complete")
+(require 'auto-complete-config)
+; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
 
 ;; ;; https://github.com/purcell/ac-slime
 ;; (add-to-list 'load-path "~/sandbox/ac-slime")
@@ -148,7 +151,9 @@
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-highlight-level 3)
+ '(line-number-mode nil)
  '(show-paren-mode t)
+ '(size-indication-mode t)
  '(tool-bar-mode nil)
  '(user-full-name "Jason Walsh"))
 
