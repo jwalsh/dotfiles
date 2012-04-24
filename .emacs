@@ -130,7 +130,7 @@
 ;; ;; %  make install DIR=$HOME/.emacs.d/
 (add-to-list 'load-path "~/sandbox/auto-complete")
 (require 'auto-complete-config)
-; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(add-to-list 'ac-dictionary-directories "~/sandbox/auto-complete/dict")
 (ac-config-default)
 
 ;; ;; https://github.com/purcell/ac-slime
@@ -151,7 +151,6 @@
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-highlight-level 3)
- '(line-number-mode nil)
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
