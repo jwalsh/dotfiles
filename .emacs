@@ -2,7 +2,6 @@
 (require 'package)
 (package-initialize)
 
-
 ;; ;; http://technomancy.us/153
 (add-to-list 'package-archives
             '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -12,10 +11,9 @@
 
 
 (defvar my-packages
-  '(starter-kit
-    starter-kit-lisp
+  '(marmalade
+    starter-kit
     starter-kit-js
-    starter-kit-bindings
     zenburn-theme
     slime
     ac-slime
@@ -25,32 +23,16 @@
     org
     org-email
     org-magit
-    jabber
     json
     paredit
     flymake
     anything-complete
     undo-tree
-    magit
-    magithub
-    magit-gh-pulls
     coffee-mode
     flymake-coffee
     js2-mode
-    jsshell-bundle
-    phantomjs
-    flymake-jshint
-    closure-lint-mode
-    bookmark+
-    anything
-    gist
     popup
-    erc-nick-notify
     htmlize
-    sass-mode
-    less-css-mode
-    markdown-mode
-    marmalade
     scpaste))
 
 (dolist (p my-packages)
