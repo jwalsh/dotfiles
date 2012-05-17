@@ -9,6 +9,9 @@ plugins=(git rails gitflow brew github git heroku lein gpg-agent rails3 redis-cl
 
 source $ZSH/oh-my-zsh.sh
 
+PREFIX=~/usr/local
+
+PATH=$PATH:$PREFIX/bin
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/usr/local/sbin
 PATH=$PATH:~/bin
