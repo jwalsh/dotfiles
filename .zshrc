@@ -5,7 +5,7 @@ ZSH_THEME="clean"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git rails gitflow brew github git heroku lein gpg-agent rails3 redis-cli rvm yum)
+plugins=(git rails gitflow brew github git heroku lein rails3 redis-cli rvm yum)
 
 source $ZSH/oh-my-zsh.sh
 
