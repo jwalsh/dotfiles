@@ -87,6 +87,8 @@
 (setq org-agenda-files '("~/Dropbox/Org/my.org"))
 (setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
 
+(setq org-src-fontify-natively t)
+
 ;; ;; Better support for undo
 (global-set-key "\C-R" 'undo-tree-undo)
 
@@ -118,6 +120,25 @@
 ;; ;; https://github.com/purcell/ac-slime
 ;; (add-to-list 'load-path "~/sandbox/ac-slime")
 ;; (require 'ac-slime)
+
+
+(add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
+(require 'textmate)
+(add-to-list 'load-path "~/.emacs.d/vendor/")
+(require 'peepopen)
+(textmate-mode)
+
+;; For Emacs on Mac OS X http://emacsformacosx.com/
+;; Opens files in the existing frame instead of making new ones.
+(setq ns-pop-up-frames nil)
+
+(defun open (project) (interactive (list (read-directory-name "Peepopen for project: " "~/sandbox/")))
+  (flet ((textmate-project-root () (file-truename project)))
+    (peepopen-goto-file-gui)))
+
+(global-set-key [(meta ?o)] 'open)
+
+
 
 (menu-bar-mode  t)
 
