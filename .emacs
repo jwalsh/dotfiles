@@ -11,8 +11,7 @@
 
 
 (defvar my-packages
-  '(marmalade
-    starter-kit
+  '(starter-kit
     starter-kit-js
     zenburn-theme
     slime
@@ -20,12 +19,24 @@
     clojure-mode
     hippie-expand-slime
     clojurescript-mode
+    cljdoc
+    nrepl-ritz
+    peepopen
+    phantomjs
+    project
+    elein
+    ecb
     org
     org-email
     org-magit
+    git-commit-mode
+    hackernews
+    heroku
+    jira
     json
     paredit
-    flymake
+    flymake-jshint
+    gh
     anything-complete
     undo-tree
     coffee-mode
@@ -33,6 +44,8 @@
     js2-mode
     popup
     htmlize
+    rainbow-delimiters
+    auto-complete
     scpaste))
 
 (dolist (p my-packages)
@@ -44,8 +57,7 @@
 (require 'zenburn-theme)
 
 ;; http://www.emacswiki.org/emacs/GoodFonts
-(set-face-attribute 'default nil :family "Inconsolata" :height 95)
-
+;; (set-face-attribute 'default nil :family "Inconsolata" :height 95)
 
 ;; Clojure
 (require 'ac-slime)
@@ -77,21 +89,18 @@
 ;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 
 ;; ;; org-mode
-(require 'org-install)
+;; (require 'org-install)
 
-(org-remember-insinuate)
-(global-set-key (kbd "C-c m") 'org-remember)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key "\C-R" 'undo-tree-undo)
 
 (setq org-directory "~/Dropbox/Org/")
 (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
 (setq org-agenda-files '("~/Dropbox/Org/my.org"))
 (setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
-
-(setq org-src-fontify-natively t)
-
-;; ;; Better support for undo
-(global-set-key "\C-R" 'undo-tree-undo)
-
 
 (add-hook 'js2-mode-hook
           'whitespace-mode)
@@ -120,25 +129,6 @@
 ;; ;; https://github.com/purcell/ac-slime
 ;; (add-to-list 'load-path "~/sandbox/ac-slime")
 ;; (require 'ac-slime)
-
-
-(add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
-(require 'textmate)
-(add-to-list 'load-path "~/.emacs.d/vendor/")
-(require 'peepopen)
-(textmate-mode)
-
-;; For Emacs on Mac OS X http://emacsformacosx.com/
-;; Opens files in the existing frame instead of making new ones.
-(setq ns-pop-up-frames nil)
-
-(defun open (project) (interactive (list (read-directory-name "Peepopen for project: " "~/sandbox/")))
-  (flet ((textmate-project-root () (file-truename project)))
-    (peepopen-goto-file-gui)))
-
-(global-set-key [(meta ?o)] 'open)
-
-
 
 (menu-bar-mode  t)
 
