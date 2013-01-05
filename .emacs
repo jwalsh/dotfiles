@@ -1,10 +1,13 @@
 ;; ;; http://tromey.com/elpa/install.html
 (require 'package)
-(package-initialize)
-
-;; ;; http://technomancy.us/153
+;; https://github.com/kingtim/nrepl.el
+;; http://technomancy.us/153
 (add-to-list 'package-archives
             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -65,6 +68,16 @@
 (add-hook 'slime-mode-hook 'paredit-mode)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
+;; nrepl.el
+(add-hook 'nrepl-interaction-mode-hook
+  'nrepl-turn-on-eldoc-mode)
+;; (setq nrepl-tab-command 'indent-for-tab-command)
+(setq nrepl-popup-stacktraces nil)
+(add-to-list 'same-window-buffer-names "*nrepl*") 
+(add-hook 'nrepl-mode-hook 'subword-mode)
+(add-hook 'nrepl-mode-hook 'paredit-mode)
+(add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
+
 ;; (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
@@ -118,12 +131,11 @@
               "http://news.ycombinator.com/rss"
               "~/notes/feeds.org" "Hacker News")))
 
-(setq org-remember-templates
-      '(("Journal"
-         ?j
-         "* %U %? %^g\n\n   %x"
-         "~/notes/journal.org"
-         'top)))
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/notes/gtd.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/notes/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
 
 
 (add-hook 'js2-mode-hook
@@ -168,7 +180,7 @@
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-highlight-level 3)
- '(org-agenda-files (quote ("~/notes/2013/_goals.org" "~/notes/journal.org" "~/notes/gtd.org")))
+ '(org-agenda-files (quote ("~/notes/tag-generation-tool-v3-support.org" "~/notes/2013/_goals.org" "~/notes/journal.org" "~/notes/gtd.org")))
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
