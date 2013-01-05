@@ -88,19 +88,43 @@
 
 ;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 
-;; ;; org-mode
-;; (require 'org-install)
-
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-R" 'undo-tree-undo)
 
-(setq org-directory "~/Dropbox/Org/")
+;; Yegge
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'kill-region)
+
+(defalias 'qrr 'query-replace-regexp)
+
+(global-set-key [f5] 'call-last-kbd-macro)
+
+
+(setq org-directory "~/notes")
+
+(setq org-agenda-files '("~/notes/gtd.org"))
+
 (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
-(setq org-agenda-files '("~/Dropbox/Org/my.org"))
-(setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
+(setq org-mobile-inbox-for-pull "~/Dropbox/Org/Mobile/my.org")
+
+ (setq org-feed-alist
+          '(("Hacker News"
+              "http://news.ycombinator.com/rss"
+              "~/notes/feeds.org" "Hacker News")))
+
+(setq org-remember-templates
+      '(("Journal"
+         ?j
+         "* %U %? %^g\n\n   %x"
+         "~/notes/journal.org"
+         'top)))
+
 
 (add-hook 'js2-mode-hook
           'whitespace-mode)
@@ -144,6 +168,7 @@
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-highlight-level 3)
+ '(org-agenda-files (quote ("~/notes/2013/_goals.org" "~/notes/journal.org" "~/notes/gtd.org")))
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
