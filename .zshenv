@@ -13,7 +13,7 @@ export HADOOP_OPTS="-Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kdc
 export HADOOP_HEAPSIZE=2000
 
 export CATALINA_HOME=~/opt/tomcat
-exoprt TOMCAT_HOME=$CATALINA_HOME
+export TOMCAT_HOME=$CATALINA_HOME
 export PATH=$CATALINA_HOME/bin:$PATH
 export CATALINA_OPTS="-Xms2048m -Xmx2048m -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled -Dcom.sun.management.jmxremote"
 
