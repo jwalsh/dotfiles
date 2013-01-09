@@ -1,21 +1,27 @@
-;; ;; http://tromey.com/elpa/install.html
+             ;; Use Starter Kit rather than doing the package management manually
+;; http://eschulte.me/emacs24-starter-kit/
+
 (require 'package)
-;; https://github.com/kingtim/nrepl.el
-;; http://technomancy.us/153
 (add-to-list 'package-archives
-            '("marmalade" . "http://marmalade-repo.org/packages/") t)
+             '("original" . "http://tromey.com/elpa/"))
+(add-to-list 'package-archives
+             '("technomancy" . "http://repo.technomancy.us/emacs/") t)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+;; (starter-kit-load "starter-kit-elpa.org")
 
 
 (when (not package-archive-contents)
-  (package-refresh-contents))
-
+    (package-refresh-contents))
 
 (defvar my-packages
   '(starter-kit
-    starter-kit-js
+    starter-kit-bindings
+    ;;    starter-kit-js
+    starter-kit-lisp
     zenburn-theme
     slime
     ac-slime
@@ -24,11 +30,11 @@
     clojurescript-mode
     cljdoc
     nrepl-ritz
-    peepopen
+    ;;     peepopen
     phantomjs
     project
     elein
-    ecb
+    ;;    ecb
     org
     org-email
     org-magit
@@ -39,7 +45,7 @@
     json
     paredit
     flymake-jshint
-    gh
+    ;;     gh
     anything-complete
     undo-tree
     coffee-mode
@@ -49,12 +55,14 @@
     htmlize
     rainbow-delimiters
     auto-complete
+    bookmark+
     scpaste))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; Starter kit
 
 ;; Display
 (require 'zenburn-theme)
@@ -63,10 +71,10 @@
 ;; (set-face-attribute 'default nil :family "Inconsolata" :height 95)
 
 ;; Clojure
-(require 'ac-slime)
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-mode-hook 'paredit-mode)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+;; (require 'ac-slime)
+;; (add-hook 'slime-mode-hook 'set-up-slime-ac)
+;; (add-hook 'slime-mode-hook 'paredit-mode)
+;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
 ;; nrepl.el
 (add-hook 'nrepl-interaction-mode-hook
@@ -95,12 +103,10 @@
   (indent-region (point-min) (point-max))
   (whitespace-cleanup))
 
-
 (require 'undo-tree)
 (global-undo-tree-mode)
 
 ;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
-
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
@@ -113,6 +119,10 @@
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
+
+;; This should already be part of
+;; http://eschulte.me/emacs-starter-kit/starter-kit-bindings.html
+(global-set-key (kbd "C-x g") 'magit-status)
 
 (defalias 'qrr 'query-replace-regexp)
 
@@ -195,7 +205,3 @@
 (put 'ido-exit-minibuffer 'disabled nil)
 
 ;; Not recommended but I find it useful for exploration
-
-
-
-
