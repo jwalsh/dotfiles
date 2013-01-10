@@ -184,7 +184,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(c-basic-offset 2)
+ '(coffee-tab-width 2)
  '(display-time-mode t)
  '(js2-auto-indent-p t)
  '(js2-basic-offset 2)
