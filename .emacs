@@ -1,18 +1,20 @@
 ;; ;; http://tromey.com/elpa/install.html
 (require 'package)
-(package-initialize)
-
-;; ;; http://technomancy.us/153
+;; https://github.com/kingtim/nrepl.el
+;; http://technomancy.us/153
 (add-to-list 'package-archives
             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
 
 (defvar my-packages
-  '(marmalade
-    starter-kit
+  '(starter-kit
     starter-kit-js
     zenburn-theme
     slime
@@ -20,12 +22,24 @@
     clojure-mode
     hippie-expand-slime
     clojurescript-mode
+    cljdoc
+    nrepl-ritz
+    peepopen
+    phantomjs
+    project
+    elein
+    ecb
     org
     org-email
     org-magit
+    git-commit-mode
+    hackernews
+    heroku
+    jira
     json
     paredit
-    flymake
+    flymake-jshint
+    gh
     anything-complete
     undo-tree
     coffee-mode
@@ -33,6 +47,8 @@
     js2-mode
     popup
     htmlize
+    rainbow-delimiters
+    auto-complete
     scpaste))
 
 (dolist (p my-packages)
@@ -44,14 +60,23 @@
 (require 'zenburn-theme)
 
 ;; http://www.emacswiki.org/emacs/GoodFonts
-(set-face-attribute 'default nil :family "Inconsolata" :height 95)
-
+;; (set-face-attribute 'default nil :family "Inconsolata" :height 95)
 
 ;; Clojure
 (require 'ac-slime)
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-mode-hook 'paredit-mode)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+
+;; nrepl.el
+(add-hook 'nrepl-interaction-mode-hook
+  'nrepl-turn-on-eldoc-mode)
+;; (setq nrepl-tab-command 'indent-for-tab-command)
+(setq nrepl-popup-stacktraces nil)
+(add-to-list 'same-window-buffer-names "*nrepl*") 
+(add-hook 'nrepl-mode-hook 'subword-mode)
+(add-hook 'nrepl-mode-hook 'paredit-mode)
+(add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
 
 ;; (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -76,19 +101,41 @@
 
 ;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 
-;; ;; org-mode
-(require 'org-install)
-
-(org-remember-insinuate)
-(global-set-key (kbd "C-c m") 'org-remember)
-
-(setq org-directory "~/Dropbox/Org/")
-(setq org-mobile-directory "~/Dropbox/Org/Mobile/")
-(setq org-agenda-files '("~/Dropbox/Org/my.org"))
-(setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
-
-;; ;; Better support for undo
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-R" 'undo-tree-undo)
+
+;; Yegge
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'kill-region)
+
+(defalias 'qrr 'query-replace-regexp)
+
+(global-set-key [f5] 'call-last-kbd-macro)
+
+
+(setq org-directory "~/notes")
+
+(setq org-agenda-files '("~/notes/gtd.org"))
+
+(setq org-mobile-directory "~/Dropbox/Org/Mobile/")
+(setq org-mobile-inbox-for-pull "~/Dropbox/Org/Mobile/my.org")
+
+ (setq org-feed-alist
+          '(("Hacker News"
+              "http://news.ycombinator.com/rss"
+              "~/notes/feeds.org" "Hacker News")))
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/notes/gtd.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/notes/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
 
 
 (add-hook 'js2-mode-hook
@@ -133,6 +180,7 @@
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-highlight-level 3)
+ '(org-agenda-files (quote ("~/notes/tag-generation-tool-v3-support.org" "~/notes/2013/_goals.org" "~/notes/journal.org" "~/notes/gtd.org")))
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
