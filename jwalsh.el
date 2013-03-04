@@ -31,6 +31,9 @@
     clojurescript-mode
     cljdoc
     nrepl-ritz
+    ac-nrepl
+    ess
+    lein
     ;;     peepopen
     phantomjs
     project
@@ -52,6 +55,17 @@
     coffee-mode
     flymake-coffee
     js2-mode
+    flymake-jshint
+    markdown-mode
+    mustache-mode
+    org-email
+    rainbow-delimiters
+    furl
+    gh
+    haml-mode
+    hackernews
+    levenshtein
+    phantomjs
     popup
     htmlize
     rainbow-delimiters
