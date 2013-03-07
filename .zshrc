@@ -9,6 +9,8 @@ source $ZSH/oh-my-zsh.sh
 
 PREFIX=~/usr/local
 
+
+PATH=/usr/local/share/npm/bin:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=/usr/local/sbin:$PATH
 PATH=~/bin:$PATH
