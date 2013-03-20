@@ -4,13 +4,13 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("original" . "http://tromey.com/elpa/"))
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
-             '("technomancy" . "http://repo.technomancy.us/emacs/") t)
+             '("original" . "http://tromey.com/elpa/"))
+;; (add-to-list 'package-archives
+;;          '("technomancy" . "http://repo.technomancy.us/emacs/") t)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 ;; (starter-kit-load "starter-kit-elpa.org")
 
@@ -151,12 +151,9 @@
 
 
 (setq org-directory "~/notes")
-(setq org-mobile-directory "~/public_html/mobile")
-(setq org-mobile-inbox-for-pull org-mobile-directory)
 (setq org-agenda-files '("~/notes/gtd.org"))
-
-(setq org-mobile-directory "~/Dropbox/Org/Mobile/")
-(setq org-mobile-inbox-for-pull "~/Dropbox/Org/Mobile/my.org")
+(setq org-mobile-directory "~/notes/")
+(setq org-mobile-inbox-for-pull "~/notes/index.org")
 
 (setq org-feed-alist
       '(("Hacker News"
@@ -169,6 +166,14 @@
         ("j" "Journal" entry (file+datetree "~/notes/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")))
 
+ (setq org-agenda-custom-commands
+       '(("w" todo "TODO")
+         ("h" agenda "" ((org-agenda-show-all-dates nil)))
+         ("W" agenda "" ((org-agenda-ndays 21)
+                         (org-agenda-show-all-dates nil)))
+         ("A" agenda ""
+          ((org-agenda-ndays 1)
+           (org-agenda-overriding-header "Today")))))
 
 (add-hook 'js2-mode-hook
           'whitespace-mode)
