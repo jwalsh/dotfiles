@@ -34,6 +34,8 @@
     ac-nrepl
     ess
     lein
+    ack-and-a-half
+    projectile
     ;;     peepopen
     phantomjs
     project
@@ -91,6 +93,10 @@
 ;; (add-hook 'slime-mode-hook 'paredit-mode)
 ;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
+(require 'epa-file)
+(epa-file-enable)
+
+
 ;; nrepl.el
 (add-hook 'nrepl-interaction-mode-hook
           'nrepl-turn-on-eldoc-mode)
@@ -145,7 +151,8 @@
 
 
 (setq org-directory "~/notes")
-
+(setq org-mobile-directory "~/public_html/mobile")
+(setq org-mobile-inbox-for-pull org-mobile-directory)
 (setq org-agenda-files '("~/notes/gtd.org"))
 
 (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
