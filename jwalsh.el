@@ -3,17 +3,16 @@
 
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("original" . "http://tromey.com/elpa/"))
 ;; (add-to-list 'package-archives
-;;          '("technomancy" . "http://repo.technomancy.us/emacs/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(package-initialize)
-;; (starter-kit-load "starter-kit-elpa.org")
-
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("original" . "http://tromey.com/elpa/"))
+;; ;; (add-to-list 'package-archives
+;; ;;          '("technomancy" . "http://repo.technomancy.us/emacs/") t)
+;; (add-to-list 'package-archives
+;;              '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (package-initialize)
+(starter-kit-load "starter-kit-elpa.org")
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -23,7 +22,6 @@
     starter-kit-bindings
     ;;    starter-kit-js
     starter-kit-lisp
-    zenburn-theme
     slime
     ac-slime
     clojure-mode
@@ -79,50 +77,11 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-;; Starter kit
-
-;; Display
-(require 'zenburn-theme)
-
-;; http://www.emacswiki.org/emacs/GoodFonts
-;; (set-face-attribute 'default nil :family "Inconsolata" :height 95)
-
-;; Clojure
-;; (require 'ac-slime)
-;; (add-hook 'slime-mode-hook 'set-up-slime-ac)
-;; (add-hook 'slime-mode-hook 'paredit-mode)
-;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-
 (require 'epa-file)
 (epa-file-enable)
 
-
-;; nrepl.el
-(add-hook 'nrepl-interaction-mode-hook
-          'nrepl-turn-on-eldoc-mode)
-;; (setq nrepl-tab-command 'indent-for-tab-command)
-(setq nrepl-popup-stacktraces nil)
-(add-to-list 'same-window-buffer-names "*nrepl*")
-(add-hook 'nrepl-mode-hook 'subword-mode)
-(add-hook 'nrepl-mode-hook 'paredit-mode)
-(add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
-
 ;; (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-;; Utilities
-(defun jw/beginning-of-buffer ()
-  "Move to the beginning of the buffer."
-  (interactive)
-  (push-mark)
-  (goto-char (point-min)))
-
-;; (defun jw/write-file-cleanup-hook ()
-;;   "Generic save functionality"
-;;   (interactive)
-;;   (untabify (point-min) (point-max))
-;;   (indent-region (point-min) (point-max))
-;;   (whitespace-cleanup))
 
 (require 'undo-tree)
 (global-undo-tree-mode)
@@ -149,11 +108,14 @@
 
 (global-set-key [f5] 'call-last-kbd-macro)
 
+(add-to-list 'load-path "~/sandbox/org-mode/contrib/lisp")
 
-(setq org-directory "~/notes")
-(setq org-agenda-files '("~/notes/gtd.org"))
-(setq org-mobile-directory "~/notes/")
-(setq org-mobile-inbox-for-pull "~/notes/index.org")
+(setq org-directory "~/org")
+(setq org-mobile-directory "~/org/")
+(setq org-mobile-inbox-for-pull "~/org/index.org")
+
+;; (add-to-list 'load-path "~/sandbox/org-drill")
+(require 'org-drill)
 
 (setq org-feed-alist
       '(("Hacker News"
@@ -211,7 +173,6 @@
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-highlight-level 3)
- '(org-agenda-files (quote ("~/notes/enabable.org" "~/notes/bk/dmp-demo-2013w2.org" "~/notes/tag-generation-tool-v3-support.org" "~/notes/2013/_goals.org" "~/notes/journal.org" "~/notes/gtd.org")))
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
