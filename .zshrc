@@ -27,6 +27,6 @@ alias cd-c='pwd | pbcopy'
 alias cd-p='cd $(pbpaste)'
 
 function check_compression {
-  curl -s -I -H 'Accept-Encoding: gzip,deflate' $1 |grep "Content-Encoding"
+  curl -s -I --compress $1 |grep "Content-Encoding"
 }
 
