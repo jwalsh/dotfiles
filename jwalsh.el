@@ -1,84 +1,19 @@
+;; http://www.nongnu.org/geiser/geiser_2.html#Installation
+(require 'package)
+(add-to-list 'package-archives
+  '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; You don't need this one if you have marmalade:
+;; (add-to-list 'package-archives
+;;  '("geiser" . "http://download.savannah.gnu.org/releases/geiser/packages"))
+(package-initialize)
+
 (add-to-list 'exec-path
              "/usr/local/bin")
 
-
-(require 'package)
-;; (add-to-list 'package-archives
-;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;; (add-to-list 'package-archives
-;;              '("original" . "http://tromey.com/elpa/"))
-;; ;; (add-to-list 'package-archives
-;; ;;          '("technomancy" . "http://repo.technomancy.us/emacs/") t)
-;; (add-to-list 'package-archives
-;;              '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (package-initialize)
-(starter-kit-load "starter-kit-elpa.org")
-
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-(defvar my-packages
-  '(starter-kit
-    starter-kit-bindings
-    ;;    starter-kit-js
-    starter-kit-lisp
-    slime
-    ac-slime
-    clojure-mode
-    hippie-expand-slime
-    clojurescript-mode
-    cljdoc
-    nrepl-ritz
-    ac-nrepl
-    ess
-    lein
-    ack-and-a-half
-    projectile
-    ;;     peepopen
-    phantomjs
-    project
-    elein
-    ;;    ecb
-    org
-    org-email
-    org-magit
-    git-commit-mode
-    hackernews
-    heroku
-    jira
-    json
-    paredit
-    flymake-jshint
-    ;;     gh
-    anything-complete
-    undo-tree
-    coffee-mode
-    flymake-coffee
-    js2-mode
-    flymake-jshint
-    markdown-mode
-    mustache-mode
-    org-email
-    rainbow-delimiters
-    furl
-    gh
-    haml-mode
-    hackernews
-    levenshtein
-    phantomjs
-    popup
-    htmlize
-    rainbow-delimiters
-    auto-complete
-    bookmark+
-    scpaste))
-
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
-
 (require 'epa-file)
 (epa-file-enable)
+
+(setq geiser-mode-start-repl-p t)
 
 ;; (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -86,11 +21,26 @@
 (require 'undo-tree)
 (global-undo-tree-mode)
 
+(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/sandbox/org-mode/contrib/lisp")
+(setq org-directory "~/org/")
+(setq org-mobile-directory "~/org/")
+(setq org-mobile-inbox-for-pull (concat org-directory "index.org"))
+
+(cond ((file-exists-p org-mobile-inbox-for-pull)
+       (message (concat org-directory " found for org-mobile"))))
+
+(org-mobile-push)
+(org-mobile-pull)
+
+(add-hook 'ispell-minor-mode 'org-mode-hook)
 ;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+
+;; Undo
 (global-set-key "\C-R" 'undo-tree-undo)
 
 ;; Yegge
@@ -100,6 +50,8 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 
+(global-set-key [C-tab] 'other-window)
+
 ;; This should already be part of
 ;; http://eschulte.me/emacs-starter-kit/starter-kit-bindings.html
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -108,14 +60,16 @@
 
 (global-set-key [f5] 'call-last-kbd-macro)
 
-(add-to-list 'load-path "~/sandbox/org-mode/contrib/lisp")
-
-(setq org-directory "~/org")
-(setq org-mobile-directory "~/org/")
-(setq org-mobile-inbox-for-pull "~/org/index.org")
 
 ;; (add-to-list 'load-path "~/sandbox/org-drill")
 (require 'org-drill)
+
+;; http://orgmode.org/worg/org-contrib/org-protocol.html
+(server-start)
+(require 'org-protocol)
+
+
+
 
 (setq org-feed-alist
       '(("Hacker News"
@@ -123,10 +77,36 @@
          "~/notes/feeds.org" "Hacker News")))
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/notes/gtd.org" "Tasks")
+      `(("t" "Todo" entry (file+headline "~/notes/gtd.org" "Tasks")
          "* TODO %?\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/notes/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")))
+         "* %?\nEntered on %U\n  %i\n  %a")
+        ("u"
+         "Task: Read this URL"
+         entry
+         (file+headline "tasks.org" "Articles To Read")
+         ,(concat "* TODO Read article: '%:description'\nURL: %c\n\n")
+         :empty-lines 1
+         :immediate-finish t)
+
+        ("w"
+         "Capture web snippet"
+         entry
+         (file+headline "my-facts.org" "Inbox")
+         ,(concat "* Fact: '%:description'        :"
+                  (format "%s" org-drill-question-tag)
+                  ":\n:PROPERTIES:\n:DATE_ADDED: %u\n:SOURCE_URL: %c\n:END:\n\n%i\n%?\n")
+         :empty-lines 1
+         :immediate-finish t)
+        ("c"
+         "Default template"
+         entry
+         (file+headline "~/org/capture.org" "Notes")
+         "* %^{Title}\n\n  Source: %u, %c\n\n  %i"
+         :empty-lines 1)
+
+    ))
+
 
  (setq org-agenda-custom-commands
        '(("w" todo "TODO")
@@ -141,9 +121,27 @@
           'whitespace-mode)
 
 ;; ;; $ lein plugin install swank-clojure 1.3.1
-(add-hook 'clojure-mode-hook 'turn-on-paredit)
+(add-hook 'clojure-mode-hook 'paredit-mode)
 
-;; ;; Custom installations
+
+  ;;; bbdb
+(require 'bbdb)
+(require 'bbdb-autoloads)
+(setq
+ bbdb-file "~/.bbdb"
+ bbdb-offer-save 'auto
+ bbdb-notice-auto-save-file t
+ bbdb-expand-mail-aliases t
+ bbdb-canonicalize-redundant-nets-p t
+ bbdb-always-add-addresses t
+ bbdb-complete-name-allow-cycling t
+ )
+;; initialization
+(bbdb-initialize 'gnus 'message)
+(bbdb-insinuate-message)
+(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+
+(setq gnus-select-method '(nnml “”))
 
 ;; ;; http://cx4a.org/software/auto-complete/manual.html#Installation
 ;; ;; git clone https://github.com/m2ym/auto-complete.git
@@ -157,7 +155,45 @@
 ;; (add-to-list 'load-path "~/sandbox/ac-slime")
 ;; (require 'ac-slime)
 
-(menu-bar-mode  t)
+(menu-bar-mode t)
+
+(setq bmkp-propertize-bookmark-names-flag nil)
+
+;; (add-to-list 'load-path "~/sandbox/ipython/docs/emacs")
+;; (require 'ipython)
+;; (setq py-python-command-args '("-pylab" "-colors" "LightBG"))
+
+;;  http://docs.racket-lang.org/guide/Emacs.html
+(require 'quack)
+
+;; http://ianeslick.com/2013/05/17/clojure-debugging-13-emacs-nrepl-and-ritz/
+(require 'nrepl)
+ 
+;; Configure nrepl.el
+(setq nrepl-hide-special-buffers t)
+(setq nrepl-popup-stacktraces-in-repl t)
+(setq nrepl-history-file "~/.emacs.d/nrepl-history")
+ 
+;; Some default eldoc facilities
+(add-hook 'nrepl-connected-hook
+          (defun pnh-clojure-mode-eldoc-hook ()
+            (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)
+            (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+            (nrepl-enable-on-existing-clojure-buffers)))
+ 
+;; Repl mode hook
+(add-hook 'nrepl-mode-hook 'subword-mode)
+ 
+;; Auto completion for NREPL
+(require 'ac-nrepl)
+(eval-after-load "auto-complete"
+'(add-to-list 'ac-modes 'nrepl-mode))
+(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+
+
+(custom-set-variables
+ '(haskell-mode-hook '(turn-on-haskell-indentation)))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
