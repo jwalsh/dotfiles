@@ -2,7 +2,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-  '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 (add-to-list 'exec-path
@@ -105,17 +105,17 @@
          "* %^{Title}\n\n  Source: %u, %c\n\n  %i"
          :empty-lines 1)
 
-    ))
+        ))
 
 
- (setq org-agenda-custom-commands
-       '(("w" todo "TODO")
-         ("h" agenda "" ((org-agenda-show-all-dates nil)))
-         ("W" agenda "" ((org-agenda-ndays 21)
-                         (org-agenda-show-all-dates nil)))
-         ("A" agenda ""
-          ((org-agenda-ndays 1)
-           (org-agenda-overriding-header "Today")))))
+(setq org-agenda-custom-commands
+      '(("w" todo "TODO")
+        ("h" agenda "" ((org-agenda-show-all-dates nil)))
+        ("W" agenda "" ((org-agenda-ndays 21)
+                        (org-agenda-show-all-dates nil)))
+        ("A" agenda ""
+         ((org-agenda-ndays 1)
+          (org-agenda-overriding-header "Today")))))
 
 (add-hook 'js2-mode-hook
           'whitespace-mode)
@@ -168,26 +168,26 @@
 
 ;; http://ianeslick.com/2013/05/17/clojure-debugging-13-emacs-nrepl-and-ritz/
 (require 'nrepl)
- 
+
 ;; Configure nrepl.el
 (setq nrepl-hide-special-buffers t)
 (setq nrepl-popup-stacktraces-in-repl t)
 (setq nrepl-history-file "~/.emacs.d/nrepl-history")
- 
+
 ;; Some default eldoc facilities
 (add-hook 'nrepl-connected-hook
           (defun pnh-clojure-mode-eldoc-hook ()
             (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)
             (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
             (nrepl-enable-on-existing-clojure-buffers)))
- 
+
 ;; Repl mode hook
 (add-hook 'nrepl-mode-hook 'subword-mode)
- 
+
 ;; Auto completion for NREPL
 (require 'ac-nrepl)
 (eval-after-load "auto-complete"
-'(add-to-list 'ac-modes 'nrepl-mode))
+  '(add-to-list 'ac-modes 'nrepl-mode))
 (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
 
 
