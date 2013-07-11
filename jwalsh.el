@@ -1,10 +1,8 @@
 ;; http://www.nongnu.org/geiser/geiser_2.html#Installation
+
 (require 'package)
 (add-to-list 'package-archives
   '("marmalade" . "http://marmalade-repo.org/packages/"))
-;; You don't need this one if you have marmalade:
-;; (add-to-list 'package-archives
-;;  '("geiser" . "http://download.savannah.gnu.org/releases/geiser/packages"))
 (package-initialize)
 
 (add-to-list 'exec-path
@@ -29,13 +27,16 @@
 (setq org-mobile-directory "~/org/")
 (setq org-mobile-inbox-for-pull (concat org-directory "index.org"))
 
-(cond ((file-exists-p org-mobile-inbox-for-pull)
-       (message (concat org-directory " found for org-mobile"))))
-
-(org-mobile-push)
-(org-mobile-pull)
+;; Running without a network connection kills the load
+;; Consider only checking this push / pull once per day
+(if (file-exists-p org-mobile-inbox-for-pull)
+    ((org-mobile-push)
+     (org-mobile-pull)
+     (message (concat org-directory " found for org-mobile")))
+  (message (concat org-directory " not available for org-mobile")))
 
 (add-hook 'ispell-minor-mode 'org-mode-hook)
+
 ;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
@@ -44,6 +45,8 @@
 
 ;; Undo
 (global-set-key "\C-R" 'undo-tree-undo)
+;; (global-set-key "\C-\\;" 'comment-or-uncomment-region)
+(global-set-key [C-tab] 'other-window)
 
 ;; Yegge
 (global-set-key "\C-x\C-m" 'execute-extended-command)
@@ -51,8 +54,6 @@
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
-
-(global-set-key [C-tab] 'other-window)
 
 ;; This should already be part of
 ;; http://eschulte.me/emacs-starter-kit/starter-kit-bindings.html
@@ -69,9 +70,6 @@
 ;; http://orgmode.org/worg/org-contrib/org-protocol.html
 (server-start)
 (require 'org-protocol)
-
-
-
 
 (setq org-feed-alist
       '(("Hacker News"
