@@ -8,6 +8,8 @@
 (add-to-list 'exec-path
              "/usr/local/bin")
 
+(add-to-list 'exec-path
+             "/usr/local/share/npm/bin")
 (require 'epa-file)
 (epa-file-enable)
 
@@ -27,13 +29,14 @@
 (setq org-mobile-directory "~/org/")
 (setq org-mobile-inbox-for-pull (concat org-directory "index.org"))
 
-;; Running without a network connection kills the load
-;; Consider only checking this push / pull once per day
-(if (file-exists-p org-mobile-inbox-for-pull)
-    ((org-mobile-push)
-     (org-mobile-pull)
-     (message (concat org-directory " found for org-mobile")))
-  (message (concat org-directory " not available for org-mobile")))
+;; ;; Running without a network connection kills the load
+;; ;; Consider only checking this push / pull once per day
+;; (if (and (file-directory-p org-mobile-directory)
+;;          (file-exists-p org-mobile-inbox-for-pull))
+;;     ((message (concat org-directory " found for org-mobile"))
+;;      (org-mobile-push)
+;;      (org-mobile-pull))
+;;   ((message ("Directories not available for org-mobile"))))
 
 (add-hook 'ispell-minor-mode 'org-mode-hook)
 
