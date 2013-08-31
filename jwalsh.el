@@ -94,23 +94,12 @@
 (global-undo-tree-mode)
 (global-set-key "\C-R" 'undo-tree-undo)
 
+;; New in 24
+(global-set-key "\C-cc" 'org-capture)
 (setq org-directory "~/notes")
-
 (setq org-agenda-files '("~/notes/gtd.org"))
-
 (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
 (setq org-mobile-inbox-for-pull "~/Dropbox/Org/Mobile/my.org")
-
-(setq org-feed-alist
-      '(("Hacker News"
-         "http://news.ycombinator.com/rss"
-         "~/notes/feeds.org" "Hacker News")))
-
-(setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/notes/gtd.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
-        ("j" "Journal" entry (file+datetree "~/notes/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")))
 
 
 (add-hook 'js2-mode-hook
