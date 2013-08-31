@@ -1,7 +1,6 @@
 (add-to-list 'exec-path
              "/usr/local/bin")
 
-
 (require 'package)
 (add-to-list 'package-archives
              '("original" . "http://tromey.com/elpa/"))
@@ -68,6 +67,7 @@
 ;; Display
 (require 'zenburn-theme)
 
+
 ;; http://www.emacswiki.org/emacs/GoodFonts
 ;; (set-face-attribute 'default nil :family "Inconsolata" :height 95)
 
@@ -90,45 +90,9 @@
 ;; (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; Utilities
-(defun jw/beginning-of-buffer ()
-  "Move to the beginning of the buffer."
-  (interactive)
-  (push-mark)
-  (goto-char (point-min)))
-
-;; (defun jw/write-file-cleanup-hook ()
-;;   "Generic save functionality"
-;;   (interactive)
-;;   (untabify (point-min) (point-max))
-;;   (indent-region (point-min) (point-max))
-;;   (whitespace-cleanup))
-
 (require 'undo-tree)
 (global-undo-tree-mode)
-
-;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-R" 'undo-tree-undo)
-
-;; Yegge
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
-
-;; This should already be part of
-;; http://eschulte.me/emacs-starter-kit/starter-kit-bindings.html
-(global-set-key (kbd "C-x g") 'magit-status)
-
-(defalias 'qrr 'query-replace-regexp)
-
-(global-set-key [f5] 'call-last-kbd-macro)
-
 
 (setq org-directory "~/notes")
 
@@ -169,7 +133,6 @@
 ;; (add-to-list 'load-path "~/sandbox/ac-slime")
 ;; (require 'ac-slime)
 
-(menu-bar-mode  t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
