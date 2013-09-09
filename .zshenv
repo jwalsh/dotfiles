@@ -1,5 +1,3 @@
-PATH=/usr/local/bin:$PATH
-PATH=/usr/local/sbin:$PATH
 PATH=~/bin:$PATH
 export PATH
 
@@ -18,3 +16,6 @@ export PATH=$CATALINA_HOME/bin:$PATH
 export CATALINA_OPTS="-Xms2048m -Xmx2048m -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled -Dcom.sun.management.jmxremote"
 
 export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
+
+export RACKET_PATH=/Applications/Racket\ v5.3.5
+export PATH=$RACKET_PATH/bin:$PATH
