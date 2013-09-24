@@ -9,7 +9,6 @@
 (add-to-list 'auto-mode-alist (cons gsl-base-dir 'c-mode))
 (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat gsl-base-dir "gsl_randist.h"))
 
-
 (defun my-cedet-hook ()
   (local-set-key [(control return)] 'semantic-ia-complete-symbol)
   (local-set-key "\C-c?" 'semantic-ia-complete-symbol-menu)

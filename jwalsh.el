@@ -13,8 +13,7 @@
 (require 'epa-file)
 (epa-file-enable)
 
-(global-git-gutter-mode t)
-
+(cua-selection-mode t)
 (setq geiser-mode-start-repl-p t)
 
 ;; (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)

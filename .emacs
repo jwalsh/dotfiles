@@ -11,9 +11,12 @@
  '(c-basic-offset 2)
  '(coffee-tab-width 2)
  '(column-number-mode t)
+ '(cua-mode t nil (cua-base))
+ '(custom-safe-themes (quote ("6cfe5b2f818c7b52723f3e121d1157cf9d95ed8923dbc1b47f392da80ef7495d" "3d6b08cd1b1def3cc0bc6a3909f67475e5612dba9fa98f8b842433d827af5d30" default)))
  '(display-time-mode t)
  '(geiser-mode-company-p t)
  '(geiser-mode-smart-tab-p t)
+ '(global-hl-line-mode t)
  '(haskell-mode-hook (quote (turn-on-haskell-indentation turn-on-font-lock turn-on-eldoc-mode capitalized-words-mode turn-on-haskell-doc-mode turn-on-haskell-decl-scan imenu-add-menubar-index)))
  '(js2-auto-indent-p t)
  '(js2-basic-offset 2)
@@ -47,16 +50,17 @@ URL: %c
  '(org-modules (quote (org-bbdb org-bibtex org-docview org-gnus org-id org-info org-jsinfo org-habit org-inlinetask org-irc org-mew org-mhe org-rmail org-vm org-wl org-w3m org-bookmark org-depend org-drill org-eshell org-exp-bibtex org-jira org-learn org-secretary org-toc org-track org-velocity)))
  '(org-protocol-project-alist (quote (("http://wal.sh/worg/" :base-url "http://wal.sh/worg/" :working-directory "/Users/jwalsh/notes/" :online-suffix ".html" :working-suffix ".org") ("http://orgmode.org/worg/" :base-url "http://orgmode.org/worg/" :working-directory "/Users/jwalsh/notes/" :online-suffix ".html" :working-suffix ".org"))))
  '(quack-programs (quote ("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
+ '(safe-local-variable-values (quote ((encoding . utf-8) (whitespace-line-column . 80) (lexical-binding . t))))
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
- '(user-full-name "Jason Walsh"))
+ '(user-full-name "Jason Walsh")
+ '(vc-annotate-very-old-color "#DC8CC3" t))
+
+(put 'downcase-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-lock-warning-face ((t (:inherit nil :foreground "red" :background nil))))
- '(linum-highlight-face ((t (:inherit default :background "color-238" :foreground "white"))))
- '(show-paren-match ((((class color) (background dark)) (:inherit nil :foreground "red")))))
-(put 'downcase-region 'disabled nil)
+ '(cursor ((t (:foreground "gray81")))))
