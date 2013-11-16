@@ -52,7 +52,9 @@ URL: %c
 
   %i" :empty-lines 1))) t)
  '(org-drill-optimal-factor-matrix (quote ((1 (1.7000000000000002 . 3.44) (2.6 . 4.14) (2.1799999999999997 . 3.72) (2.5 . 4.0) (2.36 . 3.86)))))
+ '(org-export-backends (quote (ascii beamer html icalendar latex odt confluence deck)))
  '(org-export-with-todo-keywords t)
+ '(org-html-html5-fancy t)
  '(org-modules (quote (org-bibtex org-docview org-gnus org-id org-info org-jsinfo org-habit org-inlinetask org-irc org-mew org-mhe org-rmail org-vm org-wl org-w3m org-bookmark org-depend org-drill org-eshell org-exp-bibtex org-jira org-learn org-secretary org-toc org-track org-velocity)))
  '(org-protocol-project-alist (quote (("http://wal.sh/worg/" :base-url "http://wal.sh/worg/" :working-directory "/Users/jwalsh/notes/" :online-suffix ".html" :working-suffix ".org") ("http://orgmode.org/worg/" :base-url "http://orgmode.org/worg/" :working-directory "/Users/jwalsh/notes/" :online-suffix ".html" :working-suffix ".org"))))
  '(quack-programs (quote ("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
@@ -61,7 +63,7 @@ URL: %c
  '(size-indication-mode t)
  '(tool-bar-mode nil)
  '(user-full-name "Jason Walsh")
- '(vc-annotate-very-old-color "#DC8CC3" t))
+ '(vc-annotate-very-old-color "#DC8CC3"))
 
 (put 'downcase-region 'disabled nil)
 (custom-set-faces
