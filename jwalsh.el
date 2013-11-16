@@ -1,13 +1,97 @@
 ;; http://www.nongnu.org/geiser/geiser_2.html#Installation
 
+(add-to-list 'exec-path
+             "/usr/local/bin")
+
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+;; (starter-kit-load "starter-kit-elpa.org")
+
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defvar my-packages
+  '(starter-kit
+    starter-kit-bindings
+    ack-and-a-half auctex clojure-mode coffee-mode deft expand-region
+    gist groovy-mode haml-mode haskell-mode inf-ruby
+    magit magithub markdown-mode paredit projectile python
+    sass-mode rainbow-mode scss-mode solarized-theme
+    volatile-highlights yaml-mode yari zenburn-theme
+    ;;    starter-kit-js
+    starter-kit-lisp
+    zenburn-theme
+    slime
+    ac-slime
+    clojure-mode
+    hippie-expand-slime
+    clojurescript-mode
+    cljdoc
+    nrepl-ritz
+    ;;     peepopen
+    phantomjs
+    project
+    elein
+    ;;    ecb
+    org
+    org-email
+    org-magit
+    git-commit-mode
+    hackernews
+    heroku
+    jira
+    json
+    paredit
+    flymake-jshint
+    ;;     gh
+    anything-complete
+    undo-tree
+    coffee-mode
+    flymake-coffee
+    js2-mode
+    popup
+    htmlize
+    rainbow-delimiters
+    auto-complete
+    bookmark+
+    quack
+    scpaste))
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
+;; Starter kit
+
+;; Display
+(require 'zenburn-theme)
+
+
+;; http://www.emacswiki.org/emacs/GoodFonts
+;; (set-face-attribute 'default nil :family "Inconsolata" :height 95)
+
+;; Clojure
+;; (require 'ac-slime)
+;; (add-hook 'slime-mode-hook 'set-up-slime-ac)
+;; (add-hook 'slime-mode-hook 'paredit-mode)
+;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+
+;; nrepl.el
+(add-hook 'nrepl-interaction-mode-hook
+          'nrepl-turn-on-eldoc-mode)
+;; (setq nrepl-tab-command 'indent-for-tab-command)
+(setq nrepl-popup-stacktraces nil)
+(add-to-list 'same-window-buffer-names "*nrepl*")
+(add-hook 'nrepl-mode-hook 'subword-mode)
+(add-hook 'nrepl-mode-hook 'paredit-mode)
+(add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
+
 (add-to-list 'exec-path
              "/usr/local/bin")
-
 (add-to-list 'exec-path
              "/usr/local/share/npm/bin")
 (require 'epa-file)
@@ -28,6 +112,10 @@
 (setq org-mobile-directory "~/org/")
 (setq org-mobile-inbox-for-pull (concat org-directory "index.org"))
 
+;; Local fork
+;; (add-to-list 'load-path "~/sandbox/org-confluence")
+;; (require 'org-confluence)
+
 ;; ;; Running without a network connection kills the load
 ;; ;; Consider only checking this push / pull once per day
 ;; (if (and (file-directory-p org-mobile-directory)
@@ -37,7 +125,7 @@
 ;;      (org-mobile-pull))
 ;;   ((message ("Directories not available for org-mobile"))))
 
-(add-hook 'ispell-minor-mode 'org-mode-hook)
+(add-hook 'org-mode-hook 'ispell-minor-mode)
 
 ;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 (global-set-key "\C-cl" 'org-store-link)
@@ -46,6 +134,10 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; Undo
+
+(require 'undo-tree)
+(global-undo-tree-mode)
+
 (global-set-key "\C-R" 'undo-tree-undo)
 ;; (global-set-key "\C-\\;" 'comment-or-uncomment-region)
 (global-set-key [C-tab] 'other-window)
@@ -119,6 +211,14 @@
          ((org-agenda-ndays 1)
           (org-agenda-overriding-header "Today")))))
 
+;; New in 24
+(global-set-key "\C-cc" 'org-capture)
+(setq org-directory "~/notes")
+(setq org-agenda-files '("~/notes/gtd.org"))
+(setq org-mobile-directory "~/Dropbox/Org/Mobile/")
+(setq org-mobile-inbox-for-pull "~/Dropbox/Org/Mobile/my.org")
+
+
 (add-hook 'js2-mode-hook
           'whitespace-mode)
 
@@ -126,24 +226,24 @@
 (add-hook 'clojure-mode-hook 'paredit-mode)
 
 
-  ;;; bbdb
-(require 'bbdb)
-(require 'bbdb-autoloads)
-(setq
- bbdb-file "~/.bbdb"
- bbdb-offer-save 'auto
- bbdb-notice-auto-save-file t
- bbdb-expand-mail-aliases t
- bbdb-canonicalize-redundant-nets-p t
- bbdb-always-add-addresses t
- bbdb-complete-name-allow-cycling t
- )
-;; initialization
-(bbdb-initialize 'gnus 'message)
-(bbdb-insinuate-message)
-(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+;;   ;;; bbdb
+;; (require 'bbdb)
+;; (require 'bbdb-autoloads)
+;; (setq
+;;  bbdb-file "~/.bbdb"
+;;  bbdb-offer-save 'auto
+;;  bbdb-notice-auto-save-file t
+;;  bbdb-expand-mail-aliases t
+;;  bbdb-canonicalize-redundant-nets-p t
+;;  bbdb-always-add-addresses t
+;;  bbdb-complete-name-allow-cycling t
+;;  )
+;; ;; initialization
+;; (bbdb-initialize 'gnus 'message)
+;; (bbdb-insinuate-message)
+;; (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
 
-(setq gnus-select-method '(nnml “”))
+;; (setq gnus-select-method '(nnml “”))
 
 ;; ;; http://cx4a.org/software/auto-complete/manual.html#Installation
 ;; ;; git clone https://github.com/m2ym/auto-complete.git
@@ -195,6 +295,7 @@
 
 (custom-set-variables
  '(haskell-mode-hook '(turn-on-haskell-indentation)))
+
 
 
 (custom-set-variables

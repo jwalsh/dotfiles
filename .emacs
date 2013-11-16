@@ -1,6 +1,12 @@
-(load-file "~/.emacs.d/init.el")
-(load-file "~/sandbox/dotfiles/jwalsh.el")
+(load-file "~/sandbox/dotfiles/core.el")
+(if (>= emacs-major-version 24)
+    (load-file "~/sandbox/dotfiles/jwalsh.el")
+  (message "Core initialization ignored"))
 
+;; Beginning of the el4r block:
+;; RCtool generated this block automatically. DO NOT MODIFY this block!
+
+;; End of the el4r block.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -47,10 +53,10 @@ URL: %c
   %i" :empty-lines 1))) t)
  '(org-drill-optimal-factor-matrix (quote ((1 (1.7000000000000002 . 3.44) (2.6 . 4.14) (2.1799999999999997 . 3.72) (2.5 . 4.0) (2.36 . 3.86)))))
  '(org-export-with-todo-keywords t)
- '(org-modules (quote (org-bbdb org-bibtex org-docview org-gnus org-id org-info org-jsinfo org-habit org-inlinetask org-irc org-mew org-mhe org-rmail org-vm org-wl org-w3m org-bookmark org-depend org-drill org-eshell org-exp-bibtex org-jira org-learn org-secretary org-toc org-track org-velocity)))
+ '(org-modules (quote (org-bibtex org-docview org-gnus org-id org-info org-jsinfo org-habit org-inlinetask org-irc org-mew org-mhe org-rmail org-vm org-wl org-w3m org-bookmark org-depend org-drill org-eshell org-exp-bibtex org-jira org-learn org-secretary org-toc org-track org-velocity)))
  '(org-protocol-project-alist (quote (("http://wal.sh/worg/" :base-url "http://wal.sh/worg/" :working-directory "/Users/jwalsh/notes/" :online-suffix ".html" :working-suffix ".org") ("http://orgmode.org/worg/" :base-url "http://orgmode.org/worg/" :working-directory "/Users/jwalsh/notes/" :online-suffix ".html" :working-suffix ".org"))))
  '(quack-programs (quote ("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
- '(safe-local-variable-values (quote ((encoding . utf-8) (whitespace-line-column . 80) (lexical-binding . t))))
+ '(safe-local-variable-values (quote ((org-html-head-include-scripts) (encoding . utf-8) (whitespace-line-column . 80) (lexical-binding . t))))
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
