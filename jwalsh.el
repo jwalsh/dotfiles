@@ -126,6 +126,8 @@
 ;;   ((message ("Directories not available for org-mobile"))))
 
 (add-hook 'org-mode-hook 'ispell-minor-mode)
+(add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'clojure-mode-hook 'cider-mode)
 
 ;; ;; https://github.com/briancarper/dotfiles/blob/master/.emacs
 (global-set-key "\C-cl" 'org-store-link)
@@ -218,7 +220,9 @@
 (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
 (setq org-mobile-inbox-for-pull "~/Dropbox/Org/Mobile/my.org")
 
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook
           'whitespace-mode)
 
