@@ -19,3 +19,5 @@ export CATALINA_OPTS="-Xms2048m -Xmx2048m -XX:MaxPermSize=256m -XX:+CMSClassUnlo
 
 # export RACKET_PATH=/Applications/Racket\ v5.3.5
 # export PATH=$RACKET_PATH/bin:$PATH
+
+alias bower='noglob bower'
