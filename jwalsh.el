@@ -1,5 +1,9 @@
 ;; http://www.nongnu.org/geiser/geiser_2.html#Installation
 
+(defmacro comment (&rest body)
+  "Ignores body, yields nil"
+  nil)
+
 (add-to-list 'exec-path
              "/usr/local/bin")
 
@@ -8,59 +12,73 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-;; (starter-kit-load "starter-kit-elpa.org")
-
-
 (when (not package-archive-contents)
   (package-refresh-contents))
 
 (defvar my-packages
-  '(starter-kit
-    starter-kit-bindings
-    ido-yes-or-no
-    ack-and-a-half auctex clojure-mode coffee-mode deft expand-region
-    gist groovy-mode haml-mode haskell-mode inf-ruby
-    magit magithub markdown-mode paredit projectile python
-    sass-mode rainbow-mode scss-mode solarized-theme
-    volatile-highlights yaml-mode yari zenburn-theme
-    ;;    starter-kit-js
-    starter-kit-lisp
-    slime
-    company
-    ac-slime
-    clojure-mode
-    hippie-expand-slime
-    clojurescript-mode
+  '(    ac-slime
+    ack-and-a-half
+    anything-complete
+    auctex
+    auto-complete
+    bookmark+
     cljdoc
-    nrepl-ritz
-    ;;     peepopen
-    phantomjs
-    project
+    clojure-mode
+    clojure-mode
+    clojurescript-mode
+    coffee-mode
+    coffee-mode
+    company
+    deft
     elein
-    ;;    ecb
+    expand-region
+    flymake-coffee
+    flymake-jshint
+    gist
+    git-commit-mode
+    groovy-mode
+    hackernews
+    haml-mode
+    haskell-mode
+    heroku
+    hippie-expand-slime
+    htmlize
+    ido-yes-or-no
+    inf-ruby
+    jira
+    js2-mode
+    json
+    magit
+    magithub
+    markdown-mode
+    nrepl-ritz
     org
     org-email
     org-magit
-    git-commit-mode
-    hackernews
-    heroku
-    jira
-    json
     paredit
-    flymake-jshint
-    ;;     gh
-    anything-complete
-    undo-tree
-    coffee-mode
-    flymake-coffee
-    js2-mode
+    paredit
+    phantomjs
     popup
-    htmlize
-    rainbow-delimiters
-    auto-complete
-    bookmark+
+    project
+    projectile
+    python
     quack
-    scpaste))
+    rainbow-delimiters
+    rainbow-mode
+    sass-mode
+    scpaste
+    scss-mode
+    slime
+    solarized-theme
+    starter-kit
+    starter-kit-bindings
+    starter-kit-js
+    starter-kit-lisp
+    undo-tree
+    volatile-highlights
+    yaml-mode
+    yari
+    zenburn-theme))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -97,19 +115,6 @@
 (setq org-directory "~/org/")
 (setq org-mobile-directory "~/org/")
 (setq org-mobile-inbox-for-pull (concat org-directory "index.org"))
-
-;; Local fork
-;; (add-to-list 'load-path "~/sandbox/org-confluence")
-;; (require 'org-confluence)
-
-;; ;; Running without a network connection kills the load
-;; ;; Consider only checking this push / pull once per day
-;; (if (and (file-directory-p org-mobile-directory)
-;;          (file-exists-p org-mobile-inbox-for-pull))
-;;     ((message (concat org-directory " found for org-mobile"))
-;;      (org-mobile-push)
-;;      (org-mobile-pull))
-;;   ((message ("Directories not available for org-mobile"))))
 
 (add-hook 'org-mode-hook 'ispell-minor-mode)
 (add-hook 'after-init-hook 'global-company-mode)
@@ -181,10 +186,7 @@
          entry
          (file+headline "~/sandbox/notes/capture.org" "Notes")
          "* %^{Title}\n\n  Source: %u, %c\n\n  %i"
-         :empty-lines 1)
-
-        ))
-
+         :empty-lines 1)))
 
 (setq org-agenda-custom-commands
       '(("w" todo "TODO")
@@ -210,46 +212,15 @@
 
 ;; ;; $ lein plugin install swank-clojure 1.3.1
 (add-hook 'clojure-mode-hook 'paredit-mode)
-
-
-;;   ;;; bbdb
-;; (require 'bbdb)
-;; (require 'bbdb-autoloads)
-;; (setq
-;;  bbdb-file "~/.bbdb"
-;;  bbdb-offer-save 'auto
-;;  bbdb-notice-auto-save-file t
-;;  bbdb-expand-mail-aliases t
-;;  bbdb-canonicalize-redundant-nets-p t
-;;  bbdb-always-add-addresses t
-;;  bbdb-complete-name-allow-cycling t
-;;  )
-;; ;; initialization
-;; (bbdb-initialize 'gnus 'message)
-;; (bbdb-insinuate-message)
-;; (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-
-;; (setq gnus-select-method '(nnml “”))
-
-;; ;; http://cx4a.org/software/auto-complete/manual.html#Installation
-;; ;; git clone https://github.com/m2ym/auto-complete.git
 ;; ;; %  make install DIR=$HOME/.emacs.d/
 (add-to-list 'load-path "~/sandbox/auto-complete")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/sandbox/auto-complete/dict")
 (ac-config-default)
 
-;; ;; https://github.com/purcell/ac-slime
-;; (add-to-list 'load-path "~/sandbox/ac-slime")
-;; (require 'ac-slime)
-
 (menu-bar-mode t)
 
 (setq bmkp-propertize-bookmark-names-flag nil)
-
-;; (add-to-list 'load-path "~/sandbox/ipython/docs/emacs")
-;; (require 'ipython)
-;; (setq py-python-command-args '("-pylab" "-colors" "LightBG"))
 
 ;;  http://docs.racket-lang.org/guide/Emacs.html
 (require 'quack)
@@ -271,12 +242,6 @@
 
 ;; Repl mode hook
 (add-hook 'nrepl-mode-hook 'subword-mode)
-
-;; ;; Auto completion for NREPL
-;; (require 'ac-nrepl)
-;; (eval-after-load "auto-complete"
-;;   '(add-to-list 'ac-modes 'nrepl-mode))
-;; (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
 
 (custom-set-variables
  '(haskell-mode-hook '(turn-on-haskell-indentation)))
