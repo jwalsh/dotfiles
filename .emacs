@@ -18,21 +18,19 @@
  '(coffee-tab-width 2)
  '(column-number-mode t)
  '(cua-mode t nil (cua-base))
- '(custom-safe-themes (quote ("6cfe5b2f818c7b52723f3e121d1157cf9d95ed8923dbc1b47f392da80ef7495d" "3d6b08cd1b1def3cc0bc6a3909f67475e5612dba9fa98f8b842433d827af5d30" default)))
  '(display-time-mode t)
  '(geiser-mode-company-p t)
  '(geiser-mode-smart-tab-p t)
  '(global-hl-line-mode t)
- '(haskell-mode-hook (quote (turn-on-haskell-indentation turn-on-font-lock turn-on-eldoc-mode capitalized-words-mode turn-on-haskell-doc-mode turn-on-haskell-decl-scan imenu-add-menubar-index)))
  '(js2-auto-indent-p t)
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-highlight-level 3)
- '(org-agenda-files (quote ("~/notes/gtd.org" "~/notes/bibliography.org" "~/notes/bk/numis.org" "~/notes/private.org.gpg" "~/notes/interview/javascript-mobile.org" "~/sandbox/numis/README.org" "~/notes/journal.org")))
- '(org-capture-templates (quote (("t" "Todo" entry (file+headline "~/notes/gtd.org" "Tasks") "* TODO %?
+ '(org-agenda-files (quote ("~/sandbox/notes/gtd.org" "~/sandbox/notes/bibliography.org" "~/sandbox/notes/private.org.gpg" "~/sandbox/notes/journal.org")))
+ '(org-capture-templates (quote (("t" "Todo" entry (file+headline "~/sandbox/notes/gtd.org" "Tasks") "* TODO %?
   %i
   %a
-" :clock-in t :clock-keep t) ("j" "Journal" entry (file+datetree "~/notes/journal.org") "* %?
+" :clock-in t :clock-keep t) ("j" "Journal" entry (file+datetree "~/sandbox/notes/journal.org") "* %?
 Entered on %U
   %i
   %a
@@ -46,7 +44,7 @@ URL: %c
 
 %i
 %?
-" :immediate-finish t :empty-lines 1) ("c" "Default template" entry (file+headline "~/org/capture.org" "Notes") "* %^{Title}
+" :immediate-finish t :empty-lines 1) ("c" "Default template" entry (file+headline "~/sandbox/notes/capture.org" "Notes") "* %^{Title}
 
   Source: %u, %c
 

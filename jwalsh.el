@@ -17,6 +17,7 @@
 (defvar my-packages
   '(starter-kit
     starter-kit-bindings
+    ido-yes-or-no
     ack-and-a-half auctex clojure-mode coffee-mode deft expand-region
     gist groovy-mode haml-mode haskell-mode inf-ruby
     magit magithub markdown-mode paredit projectile python
@@ -24,8 +25,8 @@
     volatile-highlights yaml-mode yari zenburn-theme
     ;;    starter-kit-js
     starter-kit-lisp
-    zenburn-theme
     slime
+    company
     ac-slime
     clojure-mode
     hippie-expand-slime
@@ -64,21 +65,6 @@
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
-;; Starter kit
-
-;; Display
-(require 'zenburn-theme)
-
-
-;; http://www.emacswiki.org/emacs/GoodFonts
-;; (set-face-attribute 'default nil :family "Inconsolata" :height 95)
-
-;; Clojure
-;; (require 'ac-slime)
-;; (add-hook 'slime-mode-hook 'set-up-slime-ac)
-;; (add-hook 'slime-mode-hook 'paredit-mode)
-;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
 ;; nrepl.el
 (add-hook 'nrepl-interaction-mode-hook
@@ -160,9 +146,6 @@
 (global-set-key [f5] 'call-last-kbd-macro)
 
 
-;; (add-to-list 'load-path "~/sandbox/org-drill")
-(require 'org-drill)
-
 ;; http://orgmode.org/worg/org-contrib/org-protocol.html
 (server-start)
 (require 'org-protocol)
@@ -190,14 +173,13 @@
          entry
          (file+headline "my-facts.org" "Inbox")
          ,(concat "* Fact: '%:description'        :"
-                  (format "%s" org-drill-question-tag)
                   ":\n:PROPERTIES:\n:DATE_ADDED: %u\n:SOURCE_URL: %c\n:END:\n\n%i\n%?\n")
          :empty-lines 1
          :immediate-finish t)
         ("c"
          "Default template"
          entry
-         (file+headline "~/org/capture.org" "Notes")
+         (file+headline "~/sandbox/notes/capture.org" "Notes")
          "* %^{Title}\n\n  Source: %u, %c\n\n  %i"
          :empty-lines 1)
 
@@ -215,8 +197,8 @@
 
 ;; New in 24
 (global-set-key "\C-cc" 'org-capture)
-(setq org-directory "~/notes")
-(setq org-agenda-files '("~/notes/gtd.org"))
+(setq org-directory "~/sandbox/notes")
+(setq org-agenda-files '(concat org-directory  "/gtd.org"))
 (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
 (setq org-mobile-inbox-for-pull "~/Dropbox/Org/Mobile/my.org")
 
@@ -290,17 +272,14 @@
 ;; Repl mode hook
 (add-hook 'nrepl-mode-hook 'subword-mode)
 
-;; Auto completion for NREPL
-(require 'ac-nrepl)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'nrepl-mode))
-(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-
+;; ;; Auto completion for NREPL
+;; (require 'ac-nrepl)
+;; (eval-after-load "auto-complete"
+;;   '(add-to-list 'ac-modes 'nrepl-mode))
+;; (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
 
 (custom-set-variables
  '(haskell-mode-hook '(turn-on-haskell-indentation)))
-
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
