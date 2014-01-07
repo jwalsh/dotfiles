@@ -35,7 +35,6 @@
     flymake-coffee
     flymake-jshint
     gist
-    git-commit-mode
     groovy-mode
     hackernews
     haml-mode
