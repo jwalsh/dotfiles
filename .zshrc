@@ -3,7 +3,7 @@ ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="clean"
 
-plugins=(git rails gitflow brew github git heroku lein rails3 redis-cli rvm yum)
+plugins=(git rails gitflow brew github git heroku lein rails redis-cli rvm yum)
 
 source $ZSH/oh-my-zsh.sh
 
