@@ -16,20 +16,15 @@
   (package-refresh-contents))
 
 (defvar my-packages
-  '(    ac-slime
-    ack-and-a-half
+  '(ack-and-a-half
     anything-complete
-    auctex
     auto-complete
     bookmark+
     cljdoc
     clojure-mode
-    clojure-mode
     clojurescript-mode
     coffee-mode
-    coffee-mode
     company
-    deft
     elein
     expand-region
     flymake-coffee
@@ -40,12 +35,11 @@
     haml-mode
     haskell-mode
     heroku
-    hippie-expand-slime
     htmlize
     ido-yes-or-no
     inf-ruby
     jira
-    js2-mode
+    ;;    js2-mode
     json
     magit
     magithub
@@ -55,9 +49,7 @@
     org-email
     org-magit
     paredit
-    paredit
     phantomjs
-    popup
     project
     projectile
     python
@@ -65,10 +57,8 @@
     rainbow-delimiters
     rainbow-mode
     sass-mode
-    scpaste
     scss-mode
     slime
-    solarized-theme
     starter-kit
     starter-kit-bindings
     starter-kit-js
