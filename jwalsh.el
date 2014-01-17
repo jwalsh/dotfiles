@@ -8,80 +8,65 @@
              "/usr/local/bin")
 
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
 (defvar my-packages
-  '(ack-and-a-half
-    anything-complete
-    auto-complete
-    bookmark+
-    cljdoc
-    clojure-mode
-    clojurescript-mode
-    coffee-mode
-    company
-    elein
-    expand-region
-    flymake-coffee
-    flymake-jshint
-    gist
-    groovy-mode
-    hackernews
-    haml-mode
-    haskell-mode
-    heroku
-    htmlize
-    ido-yes-or-no
-    inf-ruby
-    jira
-    ;;    js2-mode
-    json
-    magit
-    magithub
-    markdown-mode
-    nrepl-ritz
-    org
-    org-email
-    org-magit
-    paredit
-    phantomjs
-    project
-    projectile
-    python
-    quack
-    rainbow-delimiters
-    rainbow-mode
-    sass-mode
-    scss-mode
-    slime
-    starter-kit
-    starter-kit-bindings
-    starter-kit-js
-    starter-kit-lisp
-    undo-tree
-    volatile-highlights
-    yaml-mode
-    yari
-    zenburn-theme))
+  '(
+    ;; clojure-mode
+    ;; clojurescript-mode
+    ;; coffee-mode
+    ;; company
+    ;; elein
+    ;; expand-region
+    ;; flymake-coffee
+    ;; flymake-jshint
+    ;; gist
+    ;; groovy-mode
+    ;; hackernews
+    ;; heroku
+    ;; htmlize
+    ;; ido-yes-or-no
+    ;; inf-ruby
+    ;; jira
+    ;; json
+    ;; magit
+    ;; magithub
+    ;; markdown-mode
+    ;; nrepl-ritz
+    ;; org
+    ;; paredit
+    ;; project
+    ;; projectile
+    ;; python
+    ;; quack
+    ;; rainbow-delimiters
+    ;; rainbow-mode
+    ;; starter-kit
+    ;; starter-kit-bindings
+    ;; starter-kit-js
+    ;; starter-kit-lisp
+    ;; undo-tree
+))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
 ;; nrepl.el
-(add-hook 'nrepl-interaction-mode-hook
-          'nrepl-turn-on-eldoc-mode)
-;; (setq nrepl-tab-command 'indent-for-tab-command)
-(setq nrepl-popup-stacktraces nil)
-(add-to-list 'same-window-buffer-names "*nrepl*")
-(add-hook 'nrepl-mode-hook 'subword-mode)
-(add-hook 'nrepl-mode-hook 'paredit-mode)
-(add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
+;; (add-hook 'nrepl-interaction-mode-hook
+;;           'nrepl-turn-on-eldoc-mode)
+;; ;; (setq nrepl-tab-command 'indent-for-tab-command)
+;; (setq nrepl-popup-stacktraces nil)
+;; (add-to-list 'same-window-buffer-names "*nrepl*")
+;; (add-hook 'nrepl-mode-hook 'subword-mode)
+;; (add-hook 'nrepl-mode-hook 'paredit-mode)
+; (add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
 
 (add-to-list 'exec-path
              "/usr/local/bin")
@@ -193,7 +178,7 @@
 (setq org-mobile-directory "~/Dropbox/Org/Mobile/")
 (setq org-mobile-inbox-for-pull "~/Dropbox/Org/Mobile/my.org")
 
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook
@@ -201,39 +186,35 @@
 
 ;; ;; $ lein plugin install swank-clojure 1.3.1
 (add-hook 'clojure-mode-hook 'paredit-mode)
-;; ;; %  make install DIR=$HOME/.emacs.d/
-(add-to-list 'load-path "~/sandbox/auto-complete")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/sandbox/auto-complete/dict")
-(ac-config-default)
 
 (menu-bar-mode t)
 
 (setq bmkp-propertize-bookmark-names-flag nil)
 
 ;;  http://docs.racket-lang.org/guide/Emacs.html
-(require 'quack)
+;; (require 'quack)
 
 ;; http://ianeslick.com/2013/05/17/clojure-debugging-13-emacs-nrepl-and-ritz/
-(require 'nrepl)
+;; This gets replaced by Cider
+;; ;; (require 'nrepl)
 
-;; Configure nrepl.el
-(setq nrepl-hide-special-buffers t)
-(setq nrepl-popup-stacktraces-in-repl t)
-(setq nrepl-history-file "~/.emacs.d/nrepl-history")
+;; ;; Configure nrepl.el
+;; (setq nrepl-hide-special-buffers t)
+;; (setq nrepl-popup-stacktraces-in-repl t)
+;; (setq nrepl-history-file "~/.emacs.d/nrepl-history")
 
-;; Some default eldoc facilities
-(add-hook 'nrepl-connected-hook
-          (defun pnh-clojure-mode-eldoc-hook ()
-            (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)
-            (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-            (nrepl-enable-on-existing-clojure-buffers)))
+;; ;; Some default eldoc facilities
+;; (add-hook 'nrepl-connected-hook
+;;           (defun pnh-clojure-mode-eldoc-hook ()
+;;             (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)
+;;             (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+;;             (nrepl-enable-on-existing-clojure-buffers)))
 
-;; Repl mode hook
-(add-hook 'nrepl-mode-hook 'subword-mode)
+;; ;; Repl mode hook
+;; (add-hook 'nrepl-mode-hook 'subword-mode)
 
-(custom-set-variables
- '(haskell-mode-hook '(turn-on-haskell-indentation)))
+;; (custom-set-variables
+;;  '(haskell-mode-hook '(turn-on-haskell-indentation)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
